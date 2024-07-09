@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Post extends Model
+{
+    use HasFactory;
+    
+    const BORRADOR = 1;
+    const PUBLICIDAD = 2;
+
+    public function user(){
+        return $this->belongsto(user::class);
+    }
+    public function category (){
+        return $this->belongsTo(Category::class);
+    }
+    public function  tags(){
+        return $this->belongsToMany(tag::class);
+    }
+    public function images(){
+        return $this->morphMany(image::class, 'imageable');
+    }
+}
